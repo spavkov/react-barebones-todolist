@@ -1,14 +1,24 @@
-import React from 'react';
+import React, {useState} from 'react';
 
-class AddTodoItem extends React.Component {
+function AddTodoItem(props) {
 
-    render(props) {
-        return (
-            <form class="js-form">
-              <input autofocus type="text" aria-label="Enter a new todo item" placeholder="E.g. Buy milk on a way home" class="js-todo-input"/>
-            </form>
-        );
-    }
+    const [title, setTitle] = useState('');
+
+    const handleSubmit = (event) => {
+        event.preventDefault();   
+        props.addNewItemFunction(title);
+        setTitle('');
+    };
+
+    const handleChange = (event) => {
+        setTitle(event.target.value);
+    };
+
+    return (
+        <form className="js-form" onSubmit={handleSubmit}>
+            <input type="text" aria-label="Enter a new todo item" placeholder="E.g. Buy milk on a way home" className="js-todo-input" value={title} onChange={handleChange} />
+        </form>
+    );
 
 }
 

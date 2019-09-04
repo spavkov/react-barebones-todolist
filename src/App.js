@@ -14,6 +14,22 @@ class App extends React.Component {
     ],
   };
 
+  addNewTodoItem = (newItemTitle) => {
+    console.log("adding item " + newItemTitle);   
+    this.setState(
+      function (state, props) {
+        state.items.push({
+          title: newItemTitle,
+          done: false
+        });
+
+        return {
+          items: state.items
+        };
+      }
+    );
+  };
+
   incrementStateCounter = (increment) => {
     this.setState(prevState => (
       {
@@ -23,25 +39,19 @@ class App extends React.Component {
 
   render() {   
     return (
-      <div className="App">
+      <div>
         Hello world!<br/>
         Current counter: {this.state.counter}<br />
         <ButtonCounter counter={this.state.counter} incrementCounterFunction={this.incrementStateCounter} increment={Number(1)} />
         <ButtonCounter counter={this.state.counter} incrementCounterFunction={this.incrementStateCounter} increment={Number(2)} />      
 
         <main>
-          <div class="container">
-            <h1 class="app-title">todos</h1>
+          <div className="container">
+            <h1 className="app-title">todos</h1>
             
             <TodoItemsList items={this.state.items} />
-            <ul class="todo-list js-todo-list"></ul>
 
-
-            <AddTodoItem />
-
-
-
-
+            <AddTodoItem addNewItemFunction={this.addNewTodoItem} />
 
           </div>
         </main>     
