@@ -1,6 +1,7 @@
 import React from 'react';
 import ButtonCounter from './components/ButtonCounter';
-import TodoItemsList from "./components/TodoItemsList";
+import TodoItemsList from './components/TodoItemsList';
+import AddTodoItem from "./components/AddTodoItem";
 import './App.css';
 
 class App extends React.Component { 
@@ -35,9 +36,13 @@ class App extends React.Component {
             <TodoItemsList items={this.state.items} />
             <ul class="todo-list js-todo-list"></ul>
 
-            <form class="js-form">
-              <input autofocus type="text" aria-label="Enter a new todo item" placeholder="E.g. Build a web app" class="js-todo-input"/>
-            </form>
+
+            <AddTodoItem />
+
+
+
+
+
           </div>
         </main>     
       </div>
