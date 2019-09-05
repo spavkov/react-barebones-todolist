@@ -30,28 +30,41 @@ class App extends React.Component {
     );
   };
 
-  incrementStateCounter = (increment) => {
-    this.setState(prevState => (
-      {
-        counter: prevState.counter + increment
-      }));
- };
+  removeTodoItemByIndex = (index) => {
+    this.setState(
+      function (state, props) {
+
+        state.items.splice(index, 1);
+
+        return {
+          items: state.items
+        };
+      }
+    );
+  };  
+
+  toggleDoneStatusOfItemWithIndex = (index) => {
+    this.setState((state, props) => {
+      state.items[index].done = !state.items[index].done;
+
+      return {
+        items: state.items
+      };      
+
+    });
+  };
 
   render() {   
     return (
       <div>
-        Hello world!<br/>
-        Current counter: {this.state.counter}<br />
-        <ButtonCounter counter={this.state.counter} incrementCounterFunction={this.incrementStateCounter} increment={Number(1)} />
-        <ButtonCounter counter={this.state.counter} incrementCounterFunction={this.incrementStateCounter} increment={Number(2)} />      
 
         <main>
           <div className="container">
             <h1 className="app-title">todos</h1>
             
-            <TodoItemsList items={this.state.items} />
+            <TodoItemsList items={this.state.items} toggleDoneStatusOfItemWithIndexFunction={this.toggleDoneStatusOfItemWithIndex} removeTodoItemByIndexFunction={this.removeTodoItemByIndex} />
 
-            <AddTodoItem addNewItemFunction={this.addNewTodoItem} />
+            <AddTodoItem addNewItemFunction={this.addNewTodoItem}  />
 
           </div>
         </main>     
